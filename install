@@ -161,6 +161,17 @@ distro=""
     call_insert_point="^.*pre_mountroot$"
     grub_config="/boot/grub/grub.cfg"
     grub="grub2"
+  elif [[ "$(cat /etc/issue)" == *Ubuntu* ]]; then
+    distro="ubuntu"
+    initrd_path="bin sbin"
+    initrd="/boot/initrd.img-$(uname -r)"
+    kernel="/boot/vmlinuz-$(uname -r)"
+    init_script="scripts/local"
+    proc_insert_point="^mountroot()"
+    proc_name="\        growroot"
+    call_insert_point="^.*pre_mountroot$"
+    grub_config="/boot/grub/grub.cfg"
+    grub="grub2"
   fi
 
 # exit if distro is not supported
